@@ -10,7 +10,8 @@
 
 static bool is_word_separator(char c)
 {
-    return (c > 'a' && c < 'z') || (c > 'A' && c < 'Z');
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+        || (c >= '0' && c <= '9');
 }
 
 static int count_i_nb_words(char const *str, int i)
@@ -82,6 +83,6 @@ char **my_str_to_word_array_synthesis(char const *str)
             x++;
         }
     }
-    result[x] = NULL;
+    result[x] = 0;
     return result;
 }
