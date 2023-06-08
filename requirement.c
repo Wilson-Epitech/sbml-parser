@@ -18,7 +18,7 @@ static bool is_word_separator(char c)
 static int count_i_nb_words(char const *str, int i)
 {
     while (!is_word_separator(str[i])) {
-                i++;
+        i++;
     }
     return i;
 }
