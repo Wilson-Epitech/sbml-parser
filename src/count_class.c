@@ -8,6 +8,7 @@
 int count_class(char *str)
 {
     int j = 0;
+
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == '=')
             j++;

@@ -6,7 +6,8 @@
 */
 
 #include <stdbool.h>
-#include "stdlib.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 static bool is_word_separator(char c)
 {
