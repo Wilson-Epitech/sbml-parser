@@ -10,5 +10,7 @@
 
     char *copy_content_file(char *file);
     char *remove_spaces(const char *str);
+    int parser_loop(char *buffer);
+    int count_class(char *str);
 
 #endif /* !MY_H_ */
