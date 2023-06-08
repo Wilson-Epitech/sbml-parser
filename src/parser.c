@@ -12,39 +12,39 @@
 
 #include <stdio.h>
 
-static char *ignore_after_equal(char *str)
+char *stock_tag(const char *str, int i)
 {
-    char *new_str = NULL;
-    int count = 0;
-    int i = 0;
+    int len = strlen(str);
+    int buffer_len = (i == 0) ? len + 3 : len + 7;
+    char *data = malloc(sizeof(char) * (buffer_len + 1));
 
-    for (i = 0; str[i] != '\0'; i++) {
-        if (str[i] == '=') {
-            break;
-        }
-        count++;
-    }
-    new_str = malloc(sizeof(char) * (count + 1));
-    for (i = 0; i < count; i++) {
-        new_str[i] = str[i];
-    }
-    new_str[count] = '\0';
-    return new_str;
+    if (i == 0)
+        sprintf(data, "%s\n", str);
+    else
+        sprintf(data, "----->%s\n", str);
+    return data;
 }
 
 static int extract_tag_name(char* str)
 {
     char **tab = NULL;
+    char *data = NULL;
+    char *buffer = malloc(sizeof(char));
 
     if (strncmp(str, "<?xml", 5) == 0)
         return 0;
     str = replace_spaces_dollars(str);
     str = clean_str(str, "<>?");
     tab = my_word_array_delim(str, " ");
+    *buffer = '\0';
     for (int i = 0; tab[i] != NULL; i++) {
         tab[i] = ignore_after_equal(tab[i]);
-        printf("[%s]\n", tab[i]);
+        data = stock_tag(tab[i], i);
+        buffer = realloc(buffer, strlen(buffer) + strlen(data) + 1);
+        strcat(buffer, data);
+        free(data);
     }
+    printf("%s", buffer);
     return 0;
 }
 
