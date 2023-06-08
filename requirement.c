@@ -9,15 +9,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static bool is_word_separator(char c)
+static bool is_separator(char c)
 {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
         || (c >= '0' && c <= '9');
 }
 
-static int count_i_nb_words(char const *str, int i)
+static int count_words_i(char const *str, int i)
 {
-    while (!is_word_separator(str[i])) {
+    while (!is_separator(str[i])) {
         i++;
     }
     return i;
@@ -29,9 +29,9 @@ static int get_nb_words(char const *str)
     int nb = 0;
 
     while (str[i] != '\0') {
-        if (!is_word_separator(str[i])) {
+        if (!is_separator(str[i])) {
             nb++;
-            i = count_i_nb_words(str, i);
+            i = count_words_i(str, i);
         } else {
             i++;
         }
@@ -39,11 +39,11 @@ static int get_nb_words(char const *str)
     return nb + 1;
 }
 
-static int get_word_length(char const *str, int i)
+static int word_len(char const *str, int i)
 {
     int count = 0;
 
-    while (is_word_separator(str[i]) && str[i] != '\0') {
+    while (is_separator(str[i]) && str[i] != '\0') {
         count++;
         i++;
     }
@@ -57,14 +57,14 @@ char **my_str_to_word_array_synthesis(char const *str)
     int i = 0; int x = 0;
 
     while (str[i] != '\0') {
-        if (!is_word_separator(str[i])) {
+        if (!is_separator(str[i])) {
             i++;
         } else {
-            word_length = get_word_length(str, i);
+            word_length = word_len(str, i);
             result[x] = malloc(sizeof(char) * (word_length + 1));
 
             int y = 0;
-            while (is_word_separator(str[i]) && str[i] != '\0') {
+            while (is_separator(str[i]) && str[i] != '\0') {
                 result[x][y] = str[i];
                 i++; y++;
             }

@@ -15,5 +15,7 @@
     int get_nb_lines(char **array);
     char *getclassname(char *str);
     char** remove_duplicates_lines(char** array, int nb_lines);
+    char *replace_spaces_dollars(char* str);
+    char *clean_str(char *str, char *list);
 
 #endif /* !MY_H_ */
