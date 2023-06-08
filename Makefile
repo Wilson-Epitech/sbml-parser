@@ -5,7 +5,11 @@
 ## makefile
 ##
 
-SRC	=	src/main.c 									\
+SRC	=	src/main.c 										\
+		src/copy_content_file.c							\
+		src/remove.c									\
+		src/lib/is_delim_separator.c					\
+		src/lib/my_word_array_delim.c					\
 
 CC ?= gcc
 
