@@ -10,17 +10,28 @@
 #include <string.h>
 #include <stdio.h>
 
+static int sort_alphabetic_str_2(char **tab, int len, int swapped)
+{
+    for (int i = 1; i < len - 1; i++) {
+            if (strcmp(tab[i], tab[i + 1]) > 0) {
+                my_swap_str(&tab[i], &tab[i + 1]);
+                swapped = 1;
+            }
+    }
+    return swapped;
+}
+
 static char **sort_alphabetic_str(char **tab)
 {
     int len = 0;
+    int swapped = 1;
 
     for (int j = 0; tab[j] != NULL; j++) {
         len++;
     }
-    for (int i = 1; i < len - 1; i++) {
-        if (strcmp(tab[i], tab[i + 1]) > 0 && len > 0) {
-            my_swap_str(&tab[i], &tab[i + 1]);
-        }
+    while (swapped) {
+        swapped = 0;
+        swapped = sort_alphabetic_str_2(tab, len, swapped);
     }
     return tab;
 }

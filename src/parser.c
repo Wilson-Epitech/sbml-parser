@@ -9,6 +9,7 @@
 #include "my.h"
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include <stdio.h>
 
@@ -48,7 +49,7 @@ static int extract_tag_name(char* str)
     return 0;
 }
 
-static int no_flag_loop(char *buffer)
+static int no_flag_loop(int ac, char *buffer)
 {
     char **array = my_word_array_delim(buffer, "\n");
     int nb = 0;
@@ -65,8 +66,14 @@ static int no_flag_loop(char *buffer)
     return 0;
 }
 
-int parser_loop(char *buffer)
+int parser_loop(int ac, char **av, char *buffer)
 {
-    no_flag_loop(buffer);
+    struct stat sb;
+    if (stat(av[1], &sb) != 0 || !S_ISREG(sb.st_mode)) {
+        printf("Error: %s is not a valid file\n", av[1]);
+        return 84;
+    }
+    if (ac == 2)
+        no_flag_loop(ac, buffer);
     return 0;
 }
