@@ -13,5 +13,6 @@
     bool is_delim(char c, char *separators);
     char **my_word_array_delim(char const *str, char *separators);
     void free_array(char **array);
+    void my_swap_str(char **a, char **b);
 
 #endif /* !LIB_H_ */

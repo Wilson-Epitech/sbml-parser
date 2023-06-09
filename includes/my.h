@@ -18,5 +18,6 @@
     char *replace_spaces_dollars(char* str);
     char *clean_str(char *str, char *list);
     char *ignore_after_equal(char *str);
+    int sort_alphabetic_buffer(char *buffer);
 
 #endif /* !MY_H_ */

@@ -12,14 +12,14 @@
 
 #include <stdio.h>
 
-char *stock_tag(const char *str, int i)
+static char *stock_tag(const char *str, int i)
 {
     int len = strlen(str);
     int buffer_len = (i == 0) ? len + 3 : len + 7;
     char *data = malloc(sizeof(char) * (buffer_len + 1));
 
     if (i == 0)
-        sprintf(data, "%s\n", str);
+        sprintf(data, ".\n%s\n", str);
     else
         sprintf(data, "----->%s\n", str);
     return data;
@@ -44,7 +44,7 @@ static int extract_tag_name(char* str)
         strcat(buffer, data);
         free(data);
     }
-    printf("%s", buffer);
+    sort_alphabetic_buffer(buffer);
     return 0;
 }
 
