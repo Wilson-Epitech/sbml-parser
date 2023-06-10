@@ -46,5 +46,11 @@ int parser_loop(int ac, char **av, char *buffer)
     if (ac == 4 && av[2][0] == '-' && av[2][1] == 'i') {
         flag_i_loop(buffer, av);
     }
+    if ((ac == 4 || ac == 5) && av[2][0] == '-' && av[2][1] != 'i') {
+        return 84;
+    }
+    if (ac == 3 && av[2][0] == '-' && av[2][1] != 'i') {
+        return 84;
+    }
     return 0;
 }
