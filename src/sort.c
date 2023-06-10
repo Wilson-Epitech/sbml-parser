@@ -9,19 +9,20 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static int sort_alphabetic_str_2(char **tab, int len, int swapped)
 {
     for (int i = 1; i < len - 1; i++) {
-            if (strcmp(tab[i], tab[i + 1]) > 0) {
-                my_swap_str(&tab[i], &tab[i + 1]);
-                swapped = 1;
-            }
+        if (strcmp(tab[i], tab[i + 1]) > 0) {
+            my_swap_str(&tab[i], &tab[i + 1]);
+            swapped = 1;
+        }
     }
     return swapped;
 }
 
-static char **sort_alphabetic_str(char **tab)
+char **sort_alphabetic_str(char **tab)
 {
     int len = 0;
     int swapped = 1;
@@ -40,13 +41,14 @@ int sort_alphabetic_buffer(char *buffer)
 {
     char **array = my_word_array_delim(buffer, ".");
     char **tab = NULL;
+    char ***new_array = &array;
 
     for (int i = 0; array[i] != NULL; i++) {
         tab = my_word_array_delim(array[i], "\n");
         tab = sort_alphabetic_str(tab);
     }
-    for (int k = 0; tab[k] != NULL; k++) {
-        printf("%s\n", tab[k]);
+    for (int i = 0; tab[i] != NULL; i++) {
+        printf("%s\n", tab[i]);
     }
     return 0;
 }

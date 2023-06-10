@@ -15,8 +15,12 @@ SRC	=	src/main.c 										\
 		src/get_array_nb_lines.c						\
 		src/clean_str.c									\
 		src/sort.c										\
+		src/flag_i.c									\
+		src/no_flag_loop.c								\
 		src/replace_space_dollars.c						\
+		src/replace_dollars_space.c						\
 		src/ignore_after_equal.c						\
+		src/ignore_before_equal.c						\
 		src/lib/my_swap_str.c							\
 		src/lib/free_array.c 							\
 		src/lib/is_delim_separator.c					\

@@ -5,64 +5,31 @@
 ** parser
 */
 
-#include "lib.h"
 #include "my.h"
-#include <stdlib.h>
-#include <string.h>
+#include "lib.h"
 #include <sys/stat.h>
-
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-static char *stock_tag(const char *str, int i)
+static int flag_i_loop(char *buffer, char **av)
 {
-    int len = strlen(str);
-    int buffer_len = (i == 0) ? len + 3 : len + 7;
-    char *data = malloc(sizeof(char) * (buffer_len + 1));
-
-    if (i == 0)
-        sprintf(data, ".\n%s\n", str);
-    else
-        sprintf(data, "----->%s\n", str);
-    return data;
-}
-
-static int extract_tag_name(char* str)
-{
-    char **tab = NULL;
-    char *data = NULL;
-    char *buffer = malloc(sizeof(char));
-
-    if (strncmp(str, "<?xml", 5) == 0)
-        return 0;
-    str = replace_spaces_dollars(str);
-    str = clean_str(str, "<>?");
-    tab = my_word_array_delim(str, " ");
-    *buffer = '\0';
-    for (int i = 0; tab[i] != NULL; i++) {
-        tab[i] = ignore_after_equal(tab[i]);
-        data = stock_tag(tab[i], i);
-        buffer = realloc(buffer, strlen(buffer) + strlen(data) + 1);
-        strcat(buffer, data);
-        free(data);
-    }
-    sort_alphabetic_buffer(buffer);
-    return 0;
-}
-
-static int no_flag_loop(int ac, char *buffer)
-{
+    char *check = av[3];
     char **array = my_word_array_delim(buffer, "\n");
+    char **new_array = NULL;
+    char **tmp = NULL;
     int nb = 0;
-    int nb_lines = get_nb_lines(array);
 
-    array = remove_duplicates_lines(array, nb_lines);
     for (int i = 0; array[i] != NULL; i++) {
         array[i] = remove_spaces(array[i]);
+        array[i] = replace_spaces_dollars(array[i]);
+        array[i] = clean_str(array[i], "<>?");
         nb = count_class(array[i]);
         if (nb != 0) {
-            extract_tag_name(array[i]);
+            new_array = keep_important_line(array[i]);
         }
     }
+    display_name(new_array, check, tmp);
     return 0;
 }
 
@@ -75,5 +42,8 @@ int parser_loop(int ac, char **av, char *buffer)
     }
     if (ac == 2)
         no_flag_loop(ac, buffer);
+    if (ac == 4 && av[2][0] == '-' && av[2][1] == 'i') {
+        flag_i_loop(buffer, av);
+    }
     return 0;
 }
