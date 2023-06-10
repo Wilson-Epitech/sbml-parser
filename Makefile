@@ -8,6 +8,7 @@
 SRC	=	src/main.c 										\
 		src/copy_content_file.c							\
 		src/remove.c									\
+		src/nothing.c									\
 		src/parser.c									\
 		src/count_class.c								\
 		src/get_classname.c								\

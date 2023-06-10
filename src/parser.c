@@ -30,7 +30,7 @@ static int flag_i_loop(char *buffer, char **av)
         }
     }
     new_array = sort_alphabetic_str(new_array);
-    display_name(new_array, check, tmp);
+    display_name(new_array, check, tmp, buffer);
     return 0;
 }
 
@@ -51,6 +51,9 @@ int parser_loop(int ac, char **av, char *buffer)
     }
     if (ac == 3 && av[2][0] == '-' && av[2][1] != 'i') {
         return 84;
+    }
+    if (ac == 3 && av[2][0] == '-' && av[2][1] == 'i') {
+        nothing_loop(buffer);
     }
     return 0;
 }

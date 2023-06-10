@@ -30,7 +30,7 @@ char **keep_important_line(char *str)
     return array;
 }
 
-static char **keep_name(char *new_array, char *check)
+static char **keep_name(char *new_array, char *check, char *buffer)
 {
     char **tab = my_word_array_delim(new_array, " ");
     int len = strlen(check);
@@ -77,11 +77,11 @@ static char **display_name2(char **array)
     return tab;
 }
 
-char **display_name(char **new_array, char *check, char **tmp)
+char **display_name(char **new_array, char *check, char **tmp, char *buffer)
 {
     printf("List of species in compartment %s\n", check);
     for (int i = 0; new_array[i] != NULL; i++) {
-        tmp = keep_name(new_array[i], check);
+        tmp = keep_name(new_array[i], check, buffer);
         if (tmp != NULL) {
             tmp = display_name2(tmp);
         }
