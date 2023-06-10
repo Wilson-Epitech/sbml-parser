@@ -30,7 +30,7 @@ static int flag_i_loop(char *buffer, char **av)
         }
     }
     new_array = sort_alphabetic_str(new_array);
-    display_name(new_array, check, tmp, buffer);
+    display_name(new_array, check, tmp);
     return 0;
 }
 

@@ -24,9 +24,7 @@
     char *ignore_before_equal(char *str);
     char *replace_dollars_space(char* str);
     char **keep_important_line(char *str);
-    // char **display_name(char **new_array, char *check, char **tmp);
-    char **display_name(char **new_array, char *check,
-        char **tmp, char *buffer);
+    char **display_name(char **new_array, char *check, char **tmp);
     int nothing_loop(char *buffer);
 
 #endif /* !MY_H_ */
