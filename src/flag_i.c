@@ -86,4 +86,5 @@ char **display_name(char **new_array, char *check, char **tmp)
             tmp = display_name2(tmp);
         }
     }
+    return 0;
 }

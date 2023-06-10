@@ -41,7 +41,6 @@ int sort_alphabetic_buffer(char *buffer)
 {
     char **array = my_word_array_delim(buffer, ".");
     char **tab = NULL;
-    char ***new_array = &array;
 
     for (int i = 0; array[i] != NULL; i++) {
         tab = my_word_array_delim(array[i], "\n");
