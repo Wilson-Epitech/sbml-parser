@@ -9,29 +9,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static bool is_word_separator(char c)
+static int count_num_words(char const *str, int i)
 {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-        || (c >= '0' && c <= '9');
-}
-
-static int count_i_nb_words(char const *str, int i)
-{
-    while (!is_word_separator(str[i])) {
+    while (str[i] && !((str[i] >= 'a' && str[i] <= 'z')
+        || (str[i] >= 'A' && str[i] <= 'Z')
+        || (str[i] >= '0' && str[i] <= '9'))) {
         i++;
     }
     return i;
 }
 
-static int get_nb_words(char const *str)
+static int num_words(char const *str)
 {
     int i = 0;
     int nb = 0;
 
-    while (str[i] != '\0') {
-        if (!is_word_separator(str[i])) {
+    while (str[i]) {
+        if (!((str[i] >= 'a' && str[i] <= 'z')
+            || (str[i] >= 'A' && str[i] <= 'Z')
+            || (str[i] >= '0' && str[i] <= '9'))) {
             nb++;
-            i = count_i_nb_words(str, i);
+            i = count_num_words(str, i);
         } else {
             i++;
         }
@@ -39,26 +37,30 @@ static int get_nb_words(char const *str)
     return nb + 1;
 }
 
-static int get_word_length(char const *str, int i)
+static int get_len_of_word(char const *str, int i)
 {
     int count = 0;
 
-    while (is_word_separator(str[i]) && str[i] != '\0') {
+    while (str[i] && ((str[i] >= 'a' && str[i] <= 'z')
+        || (str[i] >= 'A' && str[i] <= 'Z')
+        || (str[i] >= '0' && str[i] <= '9'))) {
         count++;
         i++;
     }
     return count;
 }
 
-static char *parse_word(char const *str, int *i)
+static char *split_str(char const *str, int *i)
 {
     int y = 0;
-    int word_length = get_word_length(str, *i);
+    int word_length = get_len_of_word(str, *i);
     char *word = malloc(sizeof(char) * (word_length + 1));
 
     if (word == NULL)
         return NULL;
-    while (is_word_separator(str[*i]) && str[*i] != '\0') {
+    while (str[*i] && ((str[*i] >= 'a' && str[*i] <= 'z')
+        || (str[*i] >= 'A' && str[*i] <= 'Z')
+        || (str[*i] >= '0' && str[*i] <= '9'))) {
         word[y] = str[*i];
         (*i)++;
         y++;
@@ -69,18 +71,21 @@ static char *parse_word(char const *str, int *i)
 
 char **my_str_to_word_array_synthesis(char const *str)
 {
+    if (str == NULL)
+        return NULL;
     int i = 0;
     int x = 0;
-    int nb_words = get_nb_words(str);
+    int nb_words = num_words(str);
     char **result = malloc(sizeof(char*) * (nb_words + 1));
 
     if (result == NULL)
         return NULL;
-    while (str[i] != '\0') {
-        if (!is_word_separator(str[i])) {
+    while (str[i]) {
+        if (!((str[i] >= 'a' && str[i] <= 'z')
+    || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9'))) {
             i++;
         } else {
-            result[x] = parse_word(str, &i);
+            result[x] = split_str(str, &i);
             x++;
         }
     }
