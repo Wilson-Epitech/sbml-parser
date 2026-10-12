@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model id="enzyme_kinetics" name="Michaelis-Menten">
+    <listOfCompartments>
+      <compartment id="cell" name="Cell" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="E" name="Enzyme" compartment="cell" initialAmount="5"/>
+      <species id="S" name="Substrate" compartment="cell" initialAmount="100"/>
+      <species id="ES" name="Complex" compartment="cell" initialAmount="0"/>
+      <species id="P" name="Product" compartment="cell" initialAmount="0"/>
+    </listOfSpecies>
+    <listOfReactions>
+      <reaction id="binding" name="Binding" reversible="true">
+        <listOfReactants>
+          <speciesReference species="E" stoichiometry="1"/>
+          <speciesReference species="S" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ES" stoichiometry="1"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="catalysis" name="Catalysis" reversible="false">
+        <listOfReactants>
+          <speciesReference species="ES" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="E" stoichiometry="1"/>
+          <speciesReference species="P" stoichiometry="2"/>
+        </listOfProducts>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
