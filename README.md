@@ -14,7 +14,7 @@
 
 <p align="center"><img src=".github/assets/term-sbml-parser.png" alt="SBMLparser" width="820"/></p>
 
-## En deux mots
+## Le projet en quelques mots
 
 Le **SBML** est le format XML qui décrit des réactions biochimiques. Le programme lit un fichier SBML sans aucune bibliothèque XML et en affiche la structure : chaque balise et ses attributs, triés.
 
@@ -23,10 +23,6 @@ Le **SBML** est le format XML qui décrit des réactions biochimiques. Le progra
 - Parseur XML écrit à la main : balises, attributs, balises auto-fermantes
 - Liste triée des balises et de leurs attributs
 - Modèle d'exemple (cinétique enzymatique) dans [`examples/`](examples)
-
-## Sous le capot
-
-Le fichier est lu en entier, puis découpé en balises. Chaque nom de balise est associé à l'ensemble de ses attributs, sans doublons, avant d'être trié et affiché.
 
 ## Lancer le projet
 
